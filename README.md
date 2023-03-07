@@ -1,3 +1,3 @@
-- 👋 Hi, I’m Ahmad Uzzam, a fresh Computer Engineering graduate from COMSATS Islamabad,
-- 👀 I’m interested in Web Development, Quality Assurance and Data Science.
-- 📫 How to reach me: Instagram @azzammasood, email ahmaduzzammasood@gmail.com
+- 👋 Hi, I’m Ahmad Uzzam, a Computer Engineer with 2 years of professional experience in Artificial Intelligence and Embedded Systems.
+- 👀 I’m interested in Data Science. Currently freelancing on Fiverr.
+- 📫 How to reach me: email ahmaduzzammasood@gmail.com
