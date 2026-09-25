@@ -45,6 +45,14 @@ ICEBERG = r"""
             \______________/
 """.strip("\n").splitlines()
 
+# Data drifting down through the iceberg: (column, delay s, duration s).
+# Each drop enters just below the waterline and settles onto the parquet
+# rows, like freshly ingested files landing in the table.
+DROPS = [(11, 0.0, 4.2), (15, 1.6, 3.6), (20, 0.8, 4.8), (24, 2.7, 3.9),
+         (27, 3.5, 4.4), (13, 4.1, 5.0), (22, 5.2, 4.0)]
+DROP_FROM_ROW = 6   # first row under the waterline
+DROP_TO_ROW = 13    # row just above the parquet files
+
 CAPTION = ["~90% of any lakehouse lives", "below the waterline."]
 
 PROFILE = [
@@ -292,6 +300,13 @@ def render(theme, stats, today):
         parts.append(f'<tspan x="{INFO_X:.0f}" y="{30 + n * LINE_H}">{line}</tspan>')
 
     body = "\n".join(parts)
+
+    fall = (DROP_TO_ROW - DROP_FROM_ROW) * LINE_H
+    drops = "\n".join(
+        f'<text class="drop" x="{ART_X + col * CHAR_W:.1f}" '
+        f'y="{art_top + DROP_FROM_ROW * LINE_H}" '
+        f'style="animation-delay:{delay}s;animation-duration:{dur}s">▪</text>'
+        for col, delay, dur in DROPS)
     return f"""<?xml version='1.0' encoding='UTF-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,'DejaVu Sans Mono',monospace" width="{width}px" height="{height}px" font-size="{FONT_SIZE}px">
 <style>
@@ -306,12 +321,25 @@ def render(theme, stats, today):
 .add {{fill: {c['add']};}}
 .cursor {{fill: {c['fg']}; animation: blink 1.1s step-end infinite;}}
 @keyframes blink {{ 50% {{ opacity: 0; }} }}
+.water {{animation: shimmer 4s ease-in-out infinite;}}
+@keyframes shimmer {{ 50% {{ opacity: 0.55; }} }}
+.drop {{fill: {c['label']}; font-size: 18px; opacity: 0; animation: fall linear infinite;}}
+@keyframes fall {{
+  0% {{ transform: translateY(0); opacity: 0; }}
+  15% {{ opacity: 0.9; }}
+  80% {{ opacity: 0.9; }}
+  100% {{ transform: translateY({fall}px); opacity: 0; }}
+}}
+@media (prefers-reduced-motion: reduce) {{
+  .drop, .water, .cursor {{ animation: none; }}
+}}
 text, tspan {{white-space: pre;}}
 </style>
 <rect width="{width}px" height="{height}px" fill="{c['bg']}" rx="15" stroke="{c['border']}"/>
 <text x="{ART_X}" y="30" fill="{c['fg']}" xml:space="preserve">
 {body}
 </text>
+{drops}
 </svg>
 """
 
