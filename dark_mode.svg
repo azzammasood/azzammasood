@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,'DejaVu Sans Mono',monospace" width="980px" height="800px" font-size="15px">
+<style>
+.fg {fill: #c9d1d9;}
+.key {fill: #ffa657;}
+.val {fill: #a5d6ff;}
+.dim {fill: #616e7f;}
+.cap {fill: #8b949e; font-style: italic;}
+.ice {fill: #e6edf3;}
+.water {fill: #58a6ff;}
+.label {fill: #7ee787;}
+.add {fill: #3fb950;}
+.cursor {fill: #c9d1d9; animation: blink 1.1s step-end infinite;}
+@keyframes blink { 50% { opacity: 0; } }
+text, tspan {white-space: pre;}
+</style>
+<rect width="980px" height="800px" fill="#161b22" rx="15" stroke="#30363d"/>
+<text x="20" y="30" fill="#c9d1d9" xml:space="preserve">
+<tspan x="20" y="190"><tspan class="ice">                  /\</tspan></tspan>
+<tspan x="20" y="210"><tspan class="ice">                 /  \</tspan></tspan>
+<tspan x="20" y="230"><tspan class="ice">                / .  \   /\</tspan></tspan>
+<tspan x="20" y="250"><tspan class="ice">          /\   /      \_/  \</tspan></tspan>
+<tspan x="20" y="270"><tspan class="ice">         /  \_/   .         \</tspan></tspan>
+<tspan x="20" y="290"><tspan class="water">~~~~~~~~</tspan><tspan class="ice">/</tspan><tspan class="water">~~~~~~~~~~~~~~~~~~~~</tspan><tspan class="ice">\</tspan><tspan class="water">~~~~~~~</tspan></tspan>
+<tspan x="20" y="310"><tspan class="ice">  </tspan><tspan class="water">~</tspan><tspan class="ice">   </tspan><tspan class="water">~</tspan><tspan class="ice">/  </tspan><tspan class="label">SELECT</tspan><tspan class="ice"> * </tspan><tspan class="label">FROM</tspan><tspan class="ice"> </tspan><tspan class="label">lake</tspan><tspan class="ice">  \ </tspan><tspan class="water">~</tspan><tspan class="ice">   </tspan><tspan class="water">~</tspan></tspan>
+<tspan x="20" y="330"><tspan class="ice">   </tspan><tspan class="water">~</tspan><tspan class="ice">  /           |            \   </tspan><tspan class="water">~</tspan></tspan>
+<tspan x="20" y="350"><tspan class="ice">     /      </tspan><tspan class="label">metadata.json</tspan><tspan class="ice">       \</tspan></tspan>
+<tspan x="20" y="370"><tspan class="ice">    |             |              \</tspan></tspan>
+<tspan x="20" y="390"><tspan class="ice">    |       </tspan><tspan class="label">snap-0042.avro</tspan><tspan class="ice">        |</tspan></tspan>
+<tspan x="20" y="410"><tspan class="ice">    |        /    |    \          |</tspan></tspan>
+<tspan x="20" y="430"><tspan class="ice">    |   </tspan><tspan class="label">m0.avro</tspan><tspan class="ice"> </tspan><tspan class="label">m1.avro</tspan><tspan class="ice"> </tspan><tspan class="label">m2.avro</tspan><tspan class="ice">   |</tspan></tspan>
+<tspan x="20" y="450"><tspan class="ice">     \     |      |      |       /</tspan></tspan>
+<tspan x="20" y="470"><tspan class="ice">      |  </tspan><tspan class="label">00.parquet</tspan><tspan class="ice">  </tspan><tspan class="label">01.parquet</tspan><tspan class="ice">  |</tspan></tspan>
+<tspan x="20" y="490"><tspan class="ice">      |  </tspan><tspan class="label">02.parquet</tspan><tspan class="ice">  </tspan><tspan class="label">03.parquet</tspan><tspan class="ice">  /</tspan></tspan>
+<tspan x="20" y="510"><tspan class="ice">       \  </tspan><tspan class="label">04.parquet</tspan><tspan class="ice">  </tspan><tspan class="label">05.parquet</tspan><tspan class="ice">/</tspan></tspan>
+<tspan x="20" y="530"><tspan class="ice">        \___                ___/</tspan></tspan>
+<tspan x="20" y="550"><tspan class="ice">            \______________/</tspan></tspan>
+<tspan x="20" y="590" class="cap">     ~90% of any lakehouse lives     </tspan>
+<tspan x="20" y="610" class="cap">         below the waterline.        </tspan>
+<tspan x="412" y="30"><tspan class="key">ahmad</tspan><tspan class="fg">@</tspan><tspan class="key">lakehouse</tspan> <tspan class="dim">────────────────────────────────────────────</tspan></tspan>
+<tspan x="412" y="50"><tspan class="dim">. </tspan><tspan class="key">Role:</tspan> <tspan class="dim">............................</tspan> <tspan class="val">Principal Data Engineer</tspan></tspan>
+<tspan x="412" y="70"><tspan class="dim">. </tspan><tspan class="key">Host:</tspan> <tspan class="dim">............................................</tspan> <tspan class="val">Nayatel</tspan></tspan>
+<tspan x="412" y="90"><tspan class="dim">. </tspan><tspan class="key">Uptime:</tspan> <tspan class="dim">.....................</tspan> <tspan class="val">-- years, -- months, -- days</tspan></tspan>
+<tspan x="412" y="110"><tspan class="dim">. </tspan><tspan class="key">Kernel:</tspan> <tspan class="dim">.............................</tspan> <tspan class="val">GCP + Apache Iceberg</tspan></tspan>
+<tspan x="412" y="130"></tspan>
+<tspan x="412" y="150"><tspan class="dim">. </tspan><tspan class="key">Languages.Programming:</tspan> <tspan class="dim">...................</tspan> <tspan class="val">Python, Go, SQL</tspan></tspan>
+<tspan x="412" y="170"><tspan class="dim">. </tspan><tspan class="key">Languages.Frameworks:</tspan> <tspan class="dim">............................</tspan> <tspan class="val">FastAPI</tspan></tspan>
+<tspan x="412" y="190"><tspan class="dim">. </tspan><tspan class="key">Stack.Streaming:</tspan> <tspan class="dim">................</tspan> <tspan class="val">Kafka, Pub/Sub, Dataflow</tspan></tspan>
+<tspan x="412" y="210"><tspan class="dim">. </tspan><tspan class="key">Stack.Storage:</tspan> <tspan class="dim">........</tspan> <tspan class="val">BigQuery, Iceberg, ClickHouse, GCS</tspan></tspan>
+<tspan x="412" y="230"><tspan class="dim">. </tspan><tspan class="key">Stack.Compute:</tspan> <tspan class="dim">..............</tspan> <tspan class="val">Spark (Serverless), Dataflow</tspan></tspan>
+<tspan x="412" y="250"><tspan class="dim">. </tspan><tspan class="key">Stack.Orchestration:</tspan> <tspan class="dim">............</tspan> <tspan class="val">Cloud Composer (Airflow)</tspan></tspan>
+<tspan x="412" y="270"><tspan class="dim">. </tspan><tspan class="key">Stack.Infra:</tspan> <tspan class="dim">..............</tspan> <tspan class="val">Terraform, Docker, Cloud Build</tspan></tspan>
+<tspan x="412" y="290"><tspan class="dim">. </tspan><tspan class="key">Stack.AI:</tspan> <tspan class="dim">.......................</tspan> <tspan class="val">Vertex AI, RAG pipelines</tspan></tspan>
+<tspan x="412" y="310"></tspan>
+<tspan x="412" y="330"><tspan class="fg">- Pipelines </tspan><tspan class="dim">────────────────────────────────────────────────</tspan></tspan>
+<tspan x="412" y="350"><tspan class="dim">. </tspan><tspan class="key">flight_intel:</tspan> <tspan class="dim">....................</tspan> <tspan class="val">Go → Kafka → ClickHouse</tspan></tspan>
+<tspan x="412" y="370"><tspan class="dim">. </tspan><tspan class="key">lakehouse_migration:</tspan> <tspan class="dim">...........</tspan> <tspan class="val">Warehouse → GCS + Iceberg</tspan></tspan>
+<tspan x="412" y="390"><tspan class="dim">. </tspan><tspan class="key">site_monitor:</tspan> <tspan class="dim">...........</tspan> <tspan class="val">2,500+ sites → Dataflow → alerts</tspan></tspan>
+<tspan x="412" y="410"><tspan class="dim">. </tspan><tspan class="key">customer_360:</tspan> <tspan class="dim">................</tspan> <tspan class="val">Serverless Spark + Composer</tspan></tspan>
+<tspan x="412" y="430"></tspan>
+<tspan x="412" y="450"><tspan class="fg">- Certs </tspan><tspan class="dim">────────────────────────────────────────────────────</tspan></tspan>
+<tspan x="412" y="470"><tspan class="dim">. </tspan><tspan class="key">GCP:</tspan> <tspan class="dim">..................</tspan> <tspan class="val">Batch &amp; Streaming Pipelines, Smart</tspan></tspan>
+<tspan x="412" y="490"><tspan class="dim">                          </tspan><tspan class="val">Analytics, ML &amp; AI on Google Cloud</tspan></tspan>
+<tspan x="412" y="510"><tspan class="dim">. </tspan><tspan class="key">IBM:</tspan> <tspan class="dim">....................................</tspan> <tspan class="val">Data Engineering</tspan></tspan>
+<tspan x="412" y="530"><tspan class="dim">. </tspan><tspan class="key">Go:</tspan> <tspan class="dim">.......................</tspan> <tspan class="val">Getting Started with Google Go</tspan></tspan>
+<tspan x="412" y="550"><tspan class="dim">. </tspan><tspan class="key">Education:</tspan> <tspan class="dim">.............</tspan> <tspan class="val">BSc Computer Engineering, COMSATS</tspan></tspan>
+<tspan x="412" y="570"></tspan>
+<tspan x="412" y="590"><tspan class="fg">- Contact </tspan><tspan class="dim">──────────────────────────────────────────────────</tspan></tspan>
+<tspan x="412" y="610"><tspan class="dim">. </tspan><tspan class="key">Email:</tspan> <tspan class="dim">........................</tspan> <tspan class="val">ahmaduzzammasood@gmail.com</tspan></tspan>
+<tspan x="412" y="630"><tspan class="dim">. </tspan><tspan class="key">LinkedIn:</tspan> <tspan class="dim">............................</tspan> <tspan class="val">in/ahmaduzzammasood</tspan></tspan>
+<tspan x="412" y="650"></tspan>
+<tspan x="412" y="670"><tspan class="fg">- GitHub Stats </tspan><tspan class="dim">─────────────────────────────────────────────</tspan></tspan>
+<tspan x="412" y="690"><tspan class="dim">. </tspan><tspan class="key">Repos: </tspan><tspan class="dim">..................</tspan> <tspan class="val">--</tspan><tspan class="dim"> | </tspan><tspan class="key">Stars: </tspan><tspan class="dim">.................</tspan> <tspan class="val">--</tspan></tspan>
+<tspan x="412" y="710"><tspan class="dim">. </tspan><tspan class="key">Contributed: </tspan><tspan class="dim">............</tspan> <tspan class="val">--</tspan><tspan class="dim"> | </tspan><tspan class="key">Followers: </tspan><tspan class="dim">.............</tspan> <tspan class="val">--</tspan></tspan>
+<tspan x="412" y="730"><tspan class="dim">. </tspan><tspan class="key">Commits: </tspan><tspan class="dim">................</tspan> <tspan class="val">--</tspan><tspan class="dim"> | </tspan><tspan class="key">Last 12mo: </tspan><tspan class="dim">.............</tspan> <tspan class="val">--</tspan></tspan>
+<tspan x="412" y="750"></tspan>
+<tspan x="412" y="770"><tspan class="add">$ </tspan><tspan class="fg">last_ingested=2026-09-25 </tspan><tspan class="dim">-- partition refreshed daily</tspan><tspan class="cursor">█</tspan></tspan>
+</text>
+</svg>

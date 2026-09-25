@@ -1,0 +1,34 @@
+name: Refresh profile card
+
+on:
+  schedule:
+    - cron: "17 3 * * *"  # daily
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["profile/**", ".github/workflows/profile.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Render SVGs
+        env:
+          # Optional PAT (read:user) so private contributions count toward commits.
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python profile/generate.py
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dark_mode.svg light_mode.svg
+          git diff --cached --quiet || git commit -m "chore: refresh profile card"
+          git push
