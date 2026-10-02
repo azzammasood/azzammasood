@@ -45,6 +45,11 @@ ICEBERG = r"""
             \______________/
 """.strip("\n").splitlines()
 
+# ASCII portrait, drawn above the iceberg. Characters are shaded in three
+# tiers by ink density so the face keeps some depth in a single colour.
+FACE = (Path(__file__).resolve().parent / "face.txt").read_text(encoding="utf-8").rstrip().splitlines()
+FACE_TIERS = {"›": "f1", "—": "f1", "{": "f2", "í": "f2", "z": "f2"}  # rest: f3
+
 # Data drifting down through the iceberg: (column, delay s, duration s).
 # Each drop enters just below the waterline and settles onto the parquet
 # rows, like freshly ingested files landing in the table.
@@ -94,9 +99,11 @@ SECTIONS = [
 
 THEMES = {
     "dark": dict(bg="#161b22", fg="#c9d1d9", key="#ffa657", val="#a5d6ff",
+                 f1="#545d68", f2="#adbac7", f3="#f0f6fc",
                  dim="#616e7f", cap="#8b949e", ice="#e6edf3", water="#58a6ff", label="#7ee787",
                  add="#3fb950", border="#30363d"),
     "light": dict(bg="#f6f8fa", fg="#24292f", key="#953800", val="#0a3069",
+                  f1="#afb8c1", f2="#57606a", f3="#1f2328",
                   dim="#c2cfde", cap="#6e7781", ice="#57606a", water="#0969da", label="#1a7f37",
                   add="#1a7f37", border="#d0d7de"),
 }
@@ -104,8 +111,13 @@ THEMES = {
 FONT_SIZE = 15
 LINE_H = 20
 CHAR_W = 9.05  # approx advance of 15px monospace; only used for layout width
+EM = CHAR_W / FONT_SIZE  # monospace advance per px of font size
 ART_X = 20
-INFO_X = ART_X + 40 * CHAR_W + 30
+ART_W = 40 * CHAR_W     # width of the left-hand column
+INFO_X = ART_X + ART_W + 30
+
+FACE_FONT, FACE_LH = 10, 12   # portrait: ~1:2 cell so the face isn't squashed
+ICE_FONT, ICE_LH = 13, 17     # iceberg, a touch smaller to share the column
 
 
 # --------------------------------------------------------------- GitHub data
@@ -282,29 +294,62 @@ def _in_word(line, i):
     return bool(left) and bool(right) and left[-1].isalnum() and right[0].isalnum()
 
 
+def face_line(line, x0, cw):
+    """One portrait row with every glyph pinned to its own grid column.
+
+    The art mixes in characters like "›" and "—" that many monospace fonts
+    lack; the fallback font is proportional, so an explicit x per glyph keeps
+    the rows aligned regardless of what fonts the viewer has.
+    """
+    out, run, cls, start = [], "", None, 0
+    def flush():
+        if run.strip():
+            xs = " ".join(f"{x0 + (start + i) * cw:.1f}" for i in range(len(run)))
+            out.append(f'<tspan class="{cls}" x="{xs}">{escape(run)}</tspan>')
+    for i, ch in enumerate(line):
+        c = (cls or "f1") if ch == " " else FACE_TIERS.get(ch, "f3")
+        if c != cls and run:
+            flush()
+            run, start = "", i
+        cls = c
+        run += ch
+    flush()
+    return "".join(out)
+
+
 def render(theme, stats, today):
     c = THEMES[theme]
     info = info_lines(stats, today)
-    rows = max(len(info), len(ICEBERG) + len(CAPTION) + 1)
-    height = rows * LINE_H + 40
+
+    # Left column: portrait on top, iceberg (+ caption) underneath.
+    top = 30
+    face_w = max(map(len, FACE)) * EM * FACE_FONT
+    face_x = ART_X + (ART_W - face_w) / 2
+    ice_top = top + len(FACE) * FACE_LH + ICE_LH
+    ice_x = ART_X + (ART_W - 37 * EM * ICE_FONT) / 2
+    cap_top = ice_top + (len(ICEBERG) + 1) * ICE_LH
+    left_bottom = cap_top + (len(CAPTION) - 1) * ICE_LH
+
+    # Spread the info lines over the same height so both columns end together.
+    info_lh = max(LINE_H, (left_bottom - top) / (len(info) - 1))
+    height = int(left_bottom + 30)
     width = int(INFO_X + WIDTH * CHAR_W + 25)
 
-    art_top = 30 + (rows - len(ICEBERG) - len(CAPTION) - 1) * LINE_H // 2
-    parts = []
-    for n, line in enumerate(ICEBERG):
-        parts.append(f'<tspan x="{ART_X}" y="{art_top + n * LINE_H}">{art_line(line)}</tspan>')
-    for n, line in enumerate(CAPTION):
-        y = art_top + (len(ICEBERG) + 1 + n) * LINE_H
-        parts.append(f'<tspan x="{ART_X}" y="{y}" class="cap">{escape(line.center(37))}</tspan>')
-    for n, line in enumerate(info):
-        parts.append(f'<tspan x="{INFO_X:.0f}" y="{30 + n * LINE_H}">{line}</tspan>')
+    face = "\n".join(
+        f'<tspan y="{top + n * FACE_LH}">{face_line(line, face_x, EM * FACE_FONT)}</tspan>'
+        for n, line in enumerate(FACE))
+    ice = [f'<tspan x="{ice_x:.1f}" y="{ice_top + n * ICE_LH}">{art_line(line)}</tspan>'
+           for n, line in enumerate(ICEBERG)]
+    ice += [f'<tspan x="{ice_x:.1f}" y="{cap_top + n * ICE_LH}" class="cap">{escape(line.center(37))}</tspan>'
+            for n, line in enumerate(CAPTION)]
+    ice = "\n".join(ice)
+    body = "\n".join(f'<tspan x="{INFO_X:.0f}" y="{top + n * info_lh:.1f}">{line}</tspan>'
+                      for n, line in enumerate(info))
 
-    body = "\n".join(parts)
-
-    fall = (DROP_TO_ROW - DROP_FROM_ROW) * LINE_H
+    fall = (DROP_TO_ROW - DROP_FROM_ROW) * ICE_LH
     drops = "\n".join(
-        f'<text class="drop" x="{ART_X + col * CHAR_W:.1f}" '
-        f'y="{art_top + DROP_FROM_ROW * LINE_H}" '
+        f'<text class="drop" x="{ice_x + col * EM * ICE_FONT:.1f}" '
+        f'y="{ice_top + DROP_FROM_ROW * ICE_LH}" '
         f'style="animation-delay:{delay}s;animation-duration:{dur}s">▪</text>'
         for col, delay, dur in DROPS)
     return f"""<?xml version='1.0' encoding='UTF-8'?>
@@ -319,11 +364,14 @@ def render(theme, stats, today):
 .water {{fill: {c['water']};}}
 .label {{fill: {c['label']};}}
 .add {{fill: {c['add']};}}
+.f1 {{fill: {c['f1']};}}
+.f2 {{fill: {c['f2']};}}
+.f3 {{fill: {c['f3']};}}
 .cursor {{fill: {c['fg']}; animation: blink 1.1s step-end infinite;}}
 @keyframes blink {{ 50% {{ opacity: 0; }} }}
 .water {{animation: shimmer 4s ease-in-out infinite;}}
 @keyframes shimmer {{ 50% {{ opacity: 0.55; }} }}
-.drop {{fill: {c['label']}; font-size: 18px; opacity: 0; animation: fall linear infinite;}}
+.drop {{fill: {c['label']}; font-size: 16px; opacity: 0; animation: fall linear infinite;}}
 @keyframes fall {{
   0% {{ transform: translateY(0); opacity: 0; }}
   15% {{ opacity: 0.9; }}
@@ -336,7 +384,13 @@ def render(theme, stats, today):
 text, tspan {{white-space: pre;}}
 </style>
 <rect width="{width}px" height="{height}px" fill="{c['bg']}" rx="15" stroke="{c['border']}"/>
-<text x="{ART_X}" y="30" fill="{c['fg']}" xml:space="preserve">
+<text font-size="{FACE_FONT}px" xml:space="preserve">
+{face}
+</text>
+<text font-size="{ICE_FONT}px" xml:space="preserve">
+{ice}
+</text>
+<text fill="{c['fg']}" xml:space="preserve">
 {body}
 </text>
 {drops}
