@@ -102,7 +102,7 @@ text, tspan {white-space: pre;}
 <tspan x="412" y="30.0"><tspan class="key">ahmad</tspan><tspan class="fg">@</tspan><tspan class="key">lakehouse</tspan> <tspan class="dim">────────────────────────────────────────────</tspan></tspan>
 <tspan x="412" y="54.1"><tspan class="dim">. </tspan><tspan class="key">Role:</tspan> <tspan class="dim">............................</tspan> <tspan class="val">Principal Data Engineer</tspan></tspan>
 <tspan x="412" y="78.1"><tspan class="dim">. </tspan><tspan class="key">Host:</tspan> <tspan class="dim">............................................</tspan> <tspan class="val">Nayatel</tspan></tspan>
-<tspan x="412" y="102.2"><tspan class="dim">. </tspan><tspan class="key">Uptime:</tspan> <tspan class="dim">........................</tspan> <tspan class="val">4 years, 8 months, 2 days</tspan></tspan>
+<tspan x="412" y="102.2"><tspan class="dim">. </tspan><tspan class="key">Uptime:</tspan> <tspan class="dim">........................</tspan> <tspan class="val">4 years, 8 months, 3 days</tspan></tspan>
 <tspan x="412" y="126.2"><tspan class="dim">. </tspan><tspan class="key">Kernel:</tspan> <tspan class="dim">.............................</tspan> <tspan class="val">GCP + Apache Iceberg</tspan></tspan>
 <tspan x="412" y="150.3"></tspan>
 <tspan x="412" y="174.3"><tspan class="dim">. </tspan><tspan class="key">Languages.Programming:</tspan> <tspan class="dim">...................</tspan> <tspan class="val">Python, Go, SQL</tspan></tspan>
@@ -136,7 +136,7 @@ text, tspan {white-space: pre;}
 <tspan x="412" y="847.8"><tspan class="dim">. </tspan><tspan class="key">Contributed: </tspan><tspan class="dim">.............</tspan> <tspan class="val">0</tspan><tspan class="dim"> | </tspan><tspan class="key">Followers: </tspan><tspan class="dim">..............</tspan> <tspan class="val">5</tspan></tspan>
 <tspan x="412" y="871.9"><tspan class="dim">. </tspan><tspan class="key">Commits: </tspan><tspan class="dim">...............</tspan> <tspan class="val">329</tspan><tspan class="dim"> | </tspan><tspan class="key">Last 12mo: </tspan><tspan class="dim">............</tspan> <tspan class="val">120</tspan></tspan>
 <tspan x="412" y="895.9"></tspan>
-<tspan x="412" y="920.0"><tspan class="add">$ </tspan><tspan class="fg">last_ingested=2026-10-02 </tspan><tspan class="dim">-- partition refreshed daily</tspan><tspan class="cursor">█</tspan></tspan>
+<tspan x="412" y="920.0"><tspan class="add">$ </tspan><tspan class="fg">last_ingested=2026-10-03 </tspan><tspan class="dim">-- partition refreshed daily</tspan><tspan class="cursor">█</tspan></tspan>
 </text>
 <text class="drop" x="142.2" y="665" style="animation-delay:0.0s;animation-duration:4.2s">▪</text>
 <text class="drop" x="173.5" y="665" style="animation-delay:1.6s;animation-duration:3.6s">▪</text>
